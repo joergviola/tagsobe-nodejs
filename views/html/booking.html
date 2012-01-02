@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Spring Travel: Spring MVC and Web Flow Reference Application</title>
+	<link type="text/css" rel="stylesheet" href="/travel/resources/javascript/dijit/themes/tundra/tundra.css" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+	        <link rel="stylesheet" href="/travel/resources/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<link rel="stylesheet" href="/travel/resources/styles/travel.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/travel/resources/javascript/dojo/dojo.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring-Dojo.js"></script>
+</head>
+<body class="tundra">
+<div id="page" class="container">
+	<div id="header">
+		<div id="topbar">
+			<p>
+				
+					
+						Welcome, keith |
+					
+					<a href="/travel/users/logout">Logout</a>
+				
+				
+			</p>
+		</div>
+		<div id="logo">
+			<p>
+				<a href="/travel/">
+					<img src="/travel/resources/images/header.jpg" alt="Spring Travel" />
+				</a>
+			</p>
+		</div>
+	</div>
+	<div id="content">
+		<div id="local" class="span-6">
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/diplomat.jpg" alt="generic hotel" />
+				</a>
+			</p>
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/springone2gx.jpeg" alt="SpringOne 2GX" />
+				</a>
+			</p>
+		</div>
+		<div id="main" class="span-18 last">
+			
+
+
+
+<div id="bookingForm">
+	<div class="span-5">
+		<h3>Westin Diplomat</h3>
+		
+		<address>
+			3555 S. Ocean Drive
+			<br/>
+			Hollywood, FL, 33019
+			<br/>
+			USA
+		</address>
+		<p>
+			Nightly rate: 199
+		</p>
+	</div>
+	<div class="span-12">
+		
+		<form id="booking" action="/travel/hotels/booking?execution=e1s1" method="post">
+			<fieldset>
+				<legend>Book Hotel</legend>
+		        <div>
+					<div class="span-4">
+						<label for="checkinDate">Check In:</label>
+					</div>
+					<div class="span-7 last">
+						<p><input id="checkinDate" name="checkinDate" type="text" value="12-22-2011"/></p>
+						<script type="text/javascript">
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : "checkinDate",
+								widgetType : "dijit.form.DateTextBox",
+								widgetAttrs : { datePattern : "MM-dd-yyyy", required : true }}));  
+						</script>
+						
+					</div>
+				</div>
+				<div>
+					<div class="span-4">
+						<label for="checkoutDate">Check Out:</label>
+					</div>
+					<div class="span-7 last">
+						<p><input id="checkoutDate" name="checkoutDate" type="text" value="12-23-2011"/></p>
+						<script type="text/javascript">
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : "checkoutDate",
+								widgetType : "dijit.form.DateTextBox",
+								widgetAttrs : { datePattern : "MM-dd-yyyy", required : true }}));  
+						</script>
+					</div>
+				</div>
+				<div>
+					<div class="span-4">
+						<label for="beds">Room Preference:</label>
+					</div>
+					<div class="span-7 last">
+						<p>
+							<select id="beds" name="beds">
+								<option value="1">One king-size bed</option>
+								<option value="2">Two double beds</option>
+								<option value="3">Three beds</option>
+							</select>
+						</p>
+					</div>
+				</div>
+				<div>
+					<div class="label span-4">
+						Smoking Preference:
+					</div>
+					<div id="radio" class="span-7 last">
+						<p>
+							<input id="smoking" name="smoking" type="radio" value="true"/><label for="smoking">Smoking</label>
+							<input id="non-smoking" name="smoking" type="radio" value="false" checked="checked"/><label for="non-smoking">Non Smoking</label>
+						</p>
+						<script type="text/javascript">
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : 'smoking',
+								widgetType : "dijit.form.RadioButton",
+								widgetModule : "dijit.form.CheckBox",
+								widgetAttrs : { value : "true" }
+							}));
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : 'non-smoking',
+								widgetType : "dijit.form.RadioButton",
+								widgetModule : "dijit.form.CheckBox",
+								widgetAttrs : { value : "false" }
+							}));
+						</script>
+					</div>
+				</div>
+				<div>
+					<div class="label span-4">
+						Amenities:
+					</div>
+					<div id="amenities" class="span-7 last">
+						<p>
+							<input id="amenities1" name="amenities" type="checkbox" value="OCEAN_VIEW"/><label for="amenities1">Ocean View</label><input type="hidden" name="_amenities" value="on"/>
+							<br />
+							<input id="amenities2" name="amenities" type="checkbox" value="LATE_CHECKOUT"/><label for="amenities2">Late Checkout</label><input type="hidden" name="_amenities" value="on"/>
+							<br />
+							<input id="amenities3" name="amenities" type="checkbox" value="MINIBAR"/><label for="amenities3">Minibar</label><input type="hidden" name="_amenities" value="on"/>
+						</p>
+						<script type="text/javascript">
+							dojo.query("#amenities input[type='checkbox']").forEach(function(element){
+								Spring.addDecoration(new Spring.ElementDecoration({
+									elementId: element.id,
+									widgetType : "dijit.form.CheckBox",
+									widgetAttrs : { checked : element.checked }
+								}));
+							});
+						</script>
+					</div>
+				</div>
+				<div>
+					<div class="span-4">
+						<label for="creditCard">Credit Card #:</label>
+					</div>
+					<div class="span-7 last">
+						<p><input id="creditCard" name="creditCard" type="text" value=""/></p>
+						<script type="text/javascript">
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : "creditCard",
+								widgetType : "dijit.form.ValidationTextBox",
+								widgetAttrs : { required : true, invalidMessage : "A 16-digit credit card number is required.", 
+								regExp : "[0-9]{16}"  }}));
+						</script>
+					</div>
+				</div>
+				<div>
+					<div class="span-4">
+						<label for="creditCardName">Credit Card Name:</label>
+					</div>
+					<div class="span-7 last">
+						<p><input id="creditCardName" name="creditCardName" type="text" value="" maxlength="40"/></p>
+						<script type="text/javascript">
+							Spring.addDecoration(new Spring.ElementDecoration({
+								elementId : "creditCardName",
+								widgetType : "dijit.form.ValidationTextBox",
+								widgetAttrs : { required : true }}));
+						</script>
+					</div>
+				</div>
+				<div>
+					<div class="span-4">
+						<label for="creditCardExpiryMonth">Expiration Date:</label>
+					</div>
+					<div class="span-7 last">
+						<p>
+							<select id="creditCardExpiryMonth" name="creditCardExpiryMonth">
+								<option value="1">Jan</option>
+								<option value="2">Feb</option>
+								<option value="3">Mar</option>
+								<option value="4">Apr</option>
+								<option value="5">May</option>
+								<option value="6">Jun</option>
+								<option value="7">Jul</option>
+								<option value="8">Aug</option>
+								<option value="9">Sep</option>
+								<option value="10">Oct</option>
+								<option value="11">Nov</option>
+								<option value="12">Dec</option>
+							</select>
+							<select id="creditCardExpiryYear" name="creditCardExpiryYear">
+								<option value="1">2008</option>
+								<option value="2">2009</option>
+								<option value="3">2010</option>
+								<option value="4">2011</option>
+								<option value="5">2012</option>
+							</select>
+						</p>
+					</div>
+				</div>
+				<div>
+					<p>
+					<button type="submit" id="proceed" name="_eventId_proceed">Proceed</button>
+					<button type="submit" name="_eventId_cancel" >Cancel</button>
+					</p>
+					<script type="text/javascript">
+						Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));
+						Spring.addDecoration(new Spring.AjaxEventDecoration({elementId:'proceed',event:'onclick',formId:'booking',params:{fragments:'body'}}));
+					</script>
+				</div>
+			</fieldset>
+		</form>	
+	</div>
+</div>
+
+		</div>
+	</div>
+	<hr />
+	<div id="footer">
+		<a href="http://www.springframework.org">
+			<img src="/travel/resources/images/powered-by-spring.png" alt="Powered by Spring" />
+		</a>
+	</div>
+</div>
+</body>
+</html>

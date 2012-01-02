@@ -1,0 +1,22 @@
+h1 Hotel Results
+p
+	a(id="changeSearchLink",href="search?searchString=a&pageSize=5") Change Search
+p
+div(id="hotelResults")
+	table(class="summary")
+		thead
+			tr
+				th Name
+				th Address
+				th City, State
+				th Zip
+				th Action
+		tbody
+			each hotel in hotels
+				tr
+					td= hotel.name
+					td= hotel.address
+					td= hotel.city
+					td= hotel.zip
+					td
+						a(href="hotels/#{hotel.id}") View Hotel

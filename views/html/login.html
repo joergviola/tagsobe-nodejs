@@ -1,0 +1,125 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Spring Travel: Spring MVC and Web Flow Reference Application</title>
+	<link type="text/css" rel="stylesheet" href="/travel/resources/javascript/dijit/themes/tundra/tundra.css" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+	        <link rel="stylesheet" href="/travel/resources/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<link rel="stylesheet" href="/travel/resources/styles/travel.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/travel/resources/javascript/dojo/dojo.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring-Dojo.js"></script>
+</head>
+<body class="tundra">
+<div id="page" class="container">
+	<div id="header">
+		<div id="topbar">
+			<p>
+				
+				
+					<a href="/travel/users/login">Login</a>
+				
+			</p>
+		</div>
+		<div id="logo">
+			<p>
+				<a href="/travel/">
+					<img src="/travel/resources/images/header.jpg" alt="Spring Travel" />
+				</a>
+			</p>
+		</div>
+	</div>
+	<div id="content">
+		<div id="local" class="span-6">
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/diplomat.jpg" alt="generic hotel" />
+				</a>
+			</p>
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/springone2gx.jpeg" alt="SpringOne 2GX" />
+				</a>
+			</p>
+		</div>
+		<div id="main" class="span-18 last">
+			
+
+
+
+
+
+<div class="span-5">
+	<p>Valid username/passwords are:</p>
+	<ul>
+		<li>keith/melbourne</li>
+		<li>erwin/leuven</li>
+		<li>jeremy/atlanta</li>
+		<li>scott/rochester</li>
+	</ul>
+</div>
+
+<div class="span-10 append-2 last">
+	
+	<form name="f" action="/travel/users/login/authenticate" method="post">
+		<fieldset>
+			<legend>Login Information</legend>
+			<p>
+				<label for="j_username">User:</label>
+				<br />
+				<input type="text" name="j_username" id="j_username"  />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "j_username",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : { promptMessage : "Your username", required : true }}));
+				</script>
+			</p>
+			<p>
+				<label for="j_password">Password:</label>
+				<br />
+				<input type="password" name="j_password" id="j_password" />
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "j_password",
+						widgetType : "dijit.form.ValidationTextBox",
+						widgetAttrs : { promptMessage : "Your password", required : true}}));
+				</script>
+			</p>
+			<p>
+				<input type="checkbox" name="_spring_security_remember_me" id="remember_me" />
+				<label for="remember_me">Don't ask for my password for two weeks:</label>
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ElementDecoration({
+						elementId : "remember_me",
+						widgetType : "dijit.form.CheckBox"}));
+				</script>
+			</p>
+			<p>
+				<button id="submit" type="submit">Login</button>
+				<script type="text/javascript">
+					Spring.addDecoration(new Spring.ValidateAllDecoration({event : 'onclick', elementId : 'submit'}));
+				</script>
+			</p>
+		</fieldset>
+	</form>
+</div>
+
+		</div>
+	</div>
+	<hr />
+	<div id="footer">
+		<a href="http://www.springframework.org">
+			<img src="/travel/resources/images/powered-by-spring.png" alt="Powered by Spring" />
+		</a>
+	</div>
+</div>
+</body>
+</html>

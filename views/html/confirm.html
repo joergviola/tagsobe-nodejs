@@ -1,0 +1,127 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Spring Travel: Spring MVC and Web Flow Reference Application</title>
+	<link type="text/css" rel="stylesheet" href="/travel/resources/javascript/dijit/themes/tundra/tundra.css" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+	        <link rel="stylesheet" href="/travel/resources/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<link rel="stylesheet" href="/travel/resources/styles/travel.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/travel/resources/javascript/dojo/dojo.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring-Dojo.js"></script>
+</head>
+<body class="tundra">
+<div id="page" class="container">
+	<div id="header">
+		<div id="topbar">
+			<p>
+				
+					
+						Welcome, keith |
+					
+					<a href="/travel/users/logout">Logout</a>
+				
+				
+			</p>
+		</div>
+		<div id="logo">
+			<p>
+				<a href="/travel/">
+					<img src="/travel/resources/images/header.jpg" alt="Spring Travel" />
+				</a>
+			</p>
+		</div>
+	</div>
+	<div id="content">
+		<div id="local" class="span-6">
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/diplomat.jpg" alt="generic hotel" />
+				</a>
+			</p>
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/springone2gx.jpeg" alt="SpringOne 2GX" />
+				</a>
+			</p>
+		</div>
+		<div id="main" class="span-18 last">
+			
+
+
+
+<div id="bookingForm">
+	<div class="span-5">
+		<h3>Westin Diplomat</h3>
+		
+		<address>
+			3555 S. Ocean Drive
+			<br/>
+			Hollywood, FL, 33019
+			<br/>
+			USA
+		</address>
+	</div>
+	<div class="span-12 last">
+		<form id="confirm" action="/travel/hotels/booking?execution=e1s2" method="post">
+		<fieldset>
+			<legend>Confirm Booking Details</legend>
+			<div>
+				<div class="span-3">Check In:</div>
+				<div class="span-8 last">
+					<p>12-22-2011</p>
+				</div>
+			</div>
+			<div>
+				<div class="span-3">Checkout:</div>
+				<div class="span-8 last">
+					<p>12-23-2011</p>
+				</div>
+			</div>
+	        <div>
+	            <div class="span-3">Number of Nights:</div>
+	            <div class="span-8 last">
+	            	<p>1</p>
+	            </div>
+	        </div>
+	        <div>
+	            <div class="span-3">Total Payment:</div>
+	            <div class="span-8 last">
+	            	<p>199</p>
+	            </div>
+	        </div>
+			<div>
+				<div class="span-3">Credit Card #:</div>
+				<div class="span-8 last">
+					<p>1111222233334444</p>
+				</div>
+			</div>
+			<div>
+				<button type="submit" name="_eventId_confirm">Confirm</button>
+				<button type="submit" name="_eventId_revise">Revise</button>
+				<button type="submit" name="_eventId_cancel">Cancel</button>
+			</div>
+		</fieldset>
+		</form>
+	</div>
+
+</div>
+
+		</div>
+	</div>
+	<hr />
+	<div id="footer">
+		<a href="http://www.springframework.org">
+			<img src="/travel/resources/images/powered-by-spring.png" alt="Powered by Spring" />
+		</a>
+	</div>
+</div>
+</body>
+</html>

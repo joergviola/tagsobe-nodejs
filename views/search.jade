@@ -1,0 +1,18 @@
+h1 Search Hotels
+
+form(id="searchCriteria", action="hotels", method="get")
+	span(class="errors")
+	fieldset
+		div
+			label(for="searchString") Search String:
+			input(id="searchString",name="searchString",type="text",value="")
+		div
+			label(for="pageSize") Maximum results:
+				select(id="pageSize",name="pageSize")
+					option(value="5") 5
+					option(value="10") 10
+					option(value="20") 20
+		div
+			button(type="submit") Find Hotels
+
+div(id="bookings")

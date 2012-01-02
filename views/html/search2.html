@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Spring Travel: Spring MVC and Web Flow Reference Application</title>
+	<link type="text/css" rel="stylesheet" href="/travel/resources/javascript/dijit/themes/tundra/tundra.css" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/screen.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/travel/resources/styles/blueprint/print.css" type="text/css" media="print" />
+	<!--[if lt IE 8]>
+	        <link rel="stylesheet" href="/travel/resources/blueprint/ie.css" type="text/css" media="screen, projection" />
+	<![endif]-->
+	<link rel="stylesheet" href="/travel/resources/styles/travel.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/travel/resources/javascript/dojo/dojo.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring.js"></script>
+    <script type="text/javascript" src="/travel/resources/javascript/spring/Spring-Dojo.js"></script>
+</head>
+<body class="tundra">
+<div id="page" class="container">
+	<div id="header">
+		<div id="topbar">
+			<p>
+				
+					
+						Welcome, keith |
+					
+					<a href="/travel/users/logout">Logout</a>
+				
+				
+			</p>
+		</div>
+		<div id="logo">
+			<p>
+				<a href="/travel/">
+					<img src="/travel/resources/images/header.jpg" alt="Spring Travel" />
+				</a>
+			</p>
+		</div>
+	</div>
+	<div id="content">
+		<div id="local" class="span-6">
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/diplomat.jpg" alt="generic hotel" />
+				</a>
+			</p>
+			<p>
+				<a href="http://www.thespringexperience.com">
+					<img src="/travel/resources/images/springone2gx.jpeg" alt="SpringOne 2GX" />
+				</a>
+			</p>
+		</div>
+		<div id="main" class="span-18 last">
+			
+
+
+
+
+<h1>Search Hotels</h1>
+
+
+<form id="searchCriteria" class="inline" action="/travel/hotels" method="get">
+    <span class="errors span-18">
+    	
+    </span>
+	<fieldset>
+		<div class="span-8">
+			<label for="searchString">Search String:</label>
+			<input id="searchString" name="searchString" type="text" value=""/>
+			<script type="text/javascript">
+				Spring.addDecoration(new Spring.ElementDecoration({
+					elementId : "searchString",
+					widgetType : "dijit.form.ValidationTextBox",
+					widgetAttrs : { promptMessage : "Search hotels by name, address, city, or zip." }}));
+			</script>
+		</div>
+		<div class="span-6">
+			<div>
+				<label for="pageSize">Maximum results:</label>
+				<select id="pageSize" name="pageSize">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="20">20</option>
+				</select>
+			</div>
+		</div>
+		<div class="span-3 last">
+			<button type="submit">Find Hotels</button>
+		</div>		
+    </fieldset>
+</form>
+
+
+
+
+
+
+<div id="bookings" "class="section">
+
+	<h2>Current Hotel Bookings</h2>
+
+	
+
+	
+	<table class="summary">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Address</th>
+				<th>City, State</th>
+				<th>Check in Date</th>
+				<th>Check out Date</th>
+				<th>Confirmation Number</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<tr>
+				<td>Westin Diplomat</td>
+				<td>3555 S. Ocean Drive</td>
+				<td>Hollywood, FL</td>
+				<td>2011-12-22</td>
+				<td>2011-12-23</td>
+				<td>1</td>
+				<td>
+					
+						
+					
+					<form id="command" action="/travel/bookings/1" method="post"><input type="hidden" name="_method" value="delete"/>
+						<button type="submit">Cancel</button>
+					</form>
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	
+
+
+</div>
+
+		</div>
+	</div>
+	<hr />
+	<div id="footer">
+		<a href="http://www.springframework.org">
+			<img src="/travel/resources/images/powered-by-spring.png" alt="Powered by Spring" />
+		</a>
+	</div>
+</div>
+</body>
+</html>
