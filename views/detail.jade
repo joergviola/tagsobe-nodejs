@@ -1,0 +1,26 @@
+h1 Hotel Detail
+p
+	a(id="changeSearchLink",href="search?searchString=a&pageSize=5") Change Search
+p
+div(id="hotelDetail")
+	table(class="summary")
+		tr
+			td Name
+			td= hotel.name
+		tr
+			td Address
+			td= hotel.address
+		tr
+			td City
+			td= hotel.city
+		tr
+			td Zip
+			td= hotel.zip
+		tr
+			td Rate
+			td= hotel.price
+
+form(action="../booking",method="get")
+	input(type="hidden",name="hotelId",value="#{hotel.id}")
+	div
+		button(type="submit") Book Hotel

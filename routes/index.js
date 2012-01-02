@@ -5,7 +5,7 @@
 
 exports.index = function(req, res){
 	console.log("index invoked");
-	res.render('index', { title: 'Express' })
+	res.redirect("/search");
 };
 
 

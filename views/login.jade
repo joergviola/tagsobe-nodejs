@@ -1,0 +1,24 @@
+div(class="span-5")
+	p Valid username/passwords are
+	ul
+		li keith/melbourne
+		li erwin/leuven
+		li jeremy/atlanta
+		li scott/rochester
+
+div(class="span-10 append-2 last")
+	form(name="f",action="../authenticate",method="post")
+		input(type="hidden",name="url",id="url",value="#{url}")
+		fieldset
+			legend Login Information
+			p
+				label(for="username") User:
+				input(type="text",name="username",id="username")
+			p
+				label(for="password") Password:
+				input(type="password",name="password",id="password")
+			p
+				input(type="checkbox",name="remember_me",id="remember_me")
+				label(for="password") Don't ask for my password for two weeks
+			p
+				button(id="submit",type="submit") Login

@@ -15,6 +15,8 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.bodyParser());
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: "KJGUIIUGU3425KZGU" }));
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
@@ -50,12 +52,51 @@ var Hotel = sequelize.define('Hotel', {
 }, {timestamps: false,freezeTableName: true});
 sequelize.sync();
 
+// Authentication
+
+function loggedIn(req, res, next) {
+	req.session.user!=null
+	    ? next()
+	    : res.redirect("/login?url="+req.url);
+}
+
 //Routes
 
 app.get('/', routes.index);
+app.get('/login', function(req, res){
+	console.log("login invoked");
+	res.render('login', {title: 'Login', url: req.param("url")});
+});
+app.post('/authenticate', function(req, res){
+	console.log("authenticate invoked");
+	var query = Customer.find({ where: {username: req.param("username")} });
+	query.on("success", function(user) {
+		req.session.user = user.username;
+		res.redirect(req.param("url"));
+	})
+});
+app.get('/logout', function(req, res){
+	console.log("logout invoked");
+	req.session.destroy();
+	res.redirect("/");
+});
 app.get('/search', routes.search);
+app.get('/hotels/:id', function(req, res){
+	console.log("hotel detail invoked");
+	var query = Hotel.find(parseInt(req.params.id));
+	query.on('success', function(result) {
+		res.render('detail', {title: 'Hotel Detail', hotel: result});
+	});
+});
 app.get('/hotels', function(req, res){
-	console.log("hotels invoked");
+	console.log("hotel search invoked");
+	var query = Hotel.findAll({where:["name like ?", "%"+req.param("searchString")+"%"]});
+	query.on('success', function(result) {
+		res.render('hotels', {title: 'Hotels', hotels: result});
+	});
+});
+app.get('/booking', loggedIn, function(req, res){
+	console.log("booking invoked");
 	var query = Hotel.findAll({where:["name like ?", "%"+req.param("searchString")+"%"]});
 	query.on('success', function(result) {
 		res.render('hotels', {title: 'Hotels', hotels: result});
