@@ -71,8 +71,10 @@ app.post('/authenticate', function(req, res){
 	console.log("authenticate invoked");
 	var query = Customer.find({ where: {username: req.param("username")} });
 	query.on("success", function(user) {
-		req.session.user = user.username;
-		res.redirect(req.param("url"));
+		if (user!=null) {
+			req.session.user = user.username;
+			res.redirect(req.param("url"));
+		}
 	})
 });
 app.get('/logout', function(req, res){
