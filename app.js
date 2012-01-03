@@ -34,7 +34,8 @@ app.configure('production', function(){
 // Database
 
 var sequelize = new Sequelize('tagsobe', 'tagsobe', 'tagsobe', {
-	  host: "localhost"
+	  host: "localhost",
+	  logging: false
 });
 var Customer = sequelize.define('Customer', {
 	username: Sequelize.STRING,
@@ -80,11 +81,9 @@ function loggedIn(req, res, next) {
 
 app.get('/', routes.index);
 app.get('/login', function(req, res){
-	console.log("login invoked");
 	res.render('login', {title: 'Login', url: req.param("url")});
 });
 app.post('/authenticate', function(req, res){
-	console.log("authenticate invoked");
 	var query = Customer.find({ where: {username: req.param("username")} });
 	query.on("success", function(user) {
 		if (user!=null) {
@@ -94,12 +93,10 @@ app.post('/authenticate', function(req, res){
 	})
 });
 app.get('/logout', function(req, res){
-	console.log("logout invoked");
 	req.session.destroy();
 	res.redirect("/");
 });
 app.get('/search', function(req, res){
-	console.log("search invoked");
 	Booking.findAll({where:{state: 'BOOKED'}}).on('success', function(bookings) {
 		res.render('search', {title: 'Search', bookings: bookings})
 	});
@@ -107,28 +104,24 @@ app.get('/search', function(req, res){
 
 
 app.get('/hotels/:id', function(req, res){
-	console.log("hotel detail invoked");
 	var query = Hotel.find(parseInt(req.params.id));
 	query.on('success', function(result) {
 		res.render('detail', {title: 'Hotel Detail', hotel: result});
 	});
 });
 app.get('/hotels', function(req, res){
-	console.log("hotel search invoked");
 	var query = Hotel.findAll({where:["name like ?", "%"+req.param("searchString")+"%"]});
 	query.on('success', function(result) {
 		res.render('hotels', {title: 'Hotels', hotels: result});
 	});
 });
 app.get('/booking', loggedIn, function(req, res){
-	console.log("booking invoked");
 	var query = Hotel.find(parseInt(req.param["hotelId"]));
 	query.on('success', function(result) {
 		res.render('booking', {title: 'Reservation', hotel: result});
 	});
 });
 app.post('/confirm', loggedIn, function(req, res){
-	console.log("confirm invoked: ");
 	var query = Hotel.find(parseInt(req.body["hotelId"]));
 	query.on('success', function(result) {
 		var booking = Booking.build({
@@ -156,7 +149,6 @@ app.post('/confirm', loggedIn, function(req, res){
 	});
 });
 app.post('/book', loggedIn, function(req, res){
-	console.log("book invoked");
 	var query = Booking.find(parseInt(req.body["bookingId"]));
 	query.on('success', function(booking) {
 		if (req.body["_eventId_confirm"]!=null) {
