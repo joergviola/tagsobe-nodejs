@@ -10,7 +10,7 @@ div(id="bookingForm")
 			#{hotel.country}
 		p Nightly rate: #{hotel.price}
 	div(class="span-12")
-		form(id="confirm",action="../book",method="post")
+		form(id="confirm",action="/book",method="post")
 			input(type="hidden",name="bookingId",value="#{booking.id}")
 			fieldset
 				legend Confirm Booking Details

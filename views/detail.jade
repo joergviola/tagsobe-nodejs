@@ -20,7 +20,7 @@ div(id="hotelDetail")
 			td Rate
 			td= hotel.price
 
-form(action="../booking",method="get")
+form(action="/booking",method="get")
 	input(type="hidden",name="hotelId",value="#{hotel.id}")
 	div
 		button(type="submit") Book Hotel

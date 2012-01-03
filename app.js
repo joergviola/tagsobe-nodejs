@@ -73,7 +73,7 @@ sequelize.sync();
 function loggedIn(req, res, next) {
 	req.session.user!=null
 	    ? next()
-	    : res.redirect("/login?url="+req.url);
+	    : res.redirect("/login?url="+encodeURI(req.url));
 }
 
 //Routes
@@ -89,7 +89,7 @@ app.post('/authenticate', function(req, res){
 	query.on("success", function(user) {
 		if (user!=null) {
 			req.session.user = user.username;
-			res.redirect(req.param("url"));
+			res.redirect(encodeURI(req.param("url")));
 		}
 	})
 });
@@ -157,11 +157,6 @@ app.post('/confirm', loggedIn, function(req, res){
 });
 app.post('/book', loggedIn, function(req, res){
 	console.log("book invoked");
-	console.log(req);
-	console.log(req.body["_eventId_cancel"]);
-	console.log(req.body._eventId_cancel);
-	console.log(req.param["_eventId_cancel"]);
-
 	var query = Booking.find(parseInt(req.body["bookingId"]));
 	query.on('success', function(booking) {
 		if (req.body["_eventId_confirm"]!=null) {
