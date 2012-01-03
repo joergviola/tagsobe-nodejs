@@ -65,6 +65,7 @@ var Booking = sequelize.define('Booking', {
 	amenities : Sequelize.STRING,
 	state : Sequelize.STRING
 }, {timestamps: false,freezeTableName: true});
+Booking.hasOne(Hotel);
 sequelize.sync();
 
 // Authentication
