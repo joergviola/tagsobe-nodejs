@@ -1,0 +1,92 @@
+div(id="bookingForm")
+	div(class="span-5")
+		h3= hotel.name
+		
+		address
+			#{hotel.address}
+			br
+			#{hotel.city}, #{hotel.state} #{hotel.zip}
+			br
+			#{hotel.country}
+		p Nightly rate: #{hotel.price}
+	div(class="span-12")
+		form(id="booking",action="../confirm",method="post")
+			input(type="hidden",name="hotelId",value="#{hotel.id}")
+			fieldset
+				legend Book Hotel
+				div
+					div(class="span-4")
+						label(for="checkinDate") Check In:
+					div(class="span-7 last")
+						input(id="checkinDate",name="checkinDate",type="text")
+				div
+					div(class="span-4")
+						label(for="checkoutDate") Check Out:
+					div(class="span-7 last")
+						input(id="checkoutDate",name="checkoutDate",type="text")
+				div
+					div(class="span-4")
+						label(for="beds") Room Preference:
+					div(class="span-7 last")
+						select(id="beds",name="beds")
+							option(value="1") One king-size bed
+							option(value="2") Two double beds
+							option(value="3") Three beds
+				div
+					div(class="label span-4") Smoking Preference:
+					div(id="radio",class="span-7 last")
+						input(id="smoking",name="smoking",type="radio",value="true")
+						label(for="smoking") Smoking
+						input(id="non-smoking",name="smoking",type="radio",value="false",checked="checked")
+						label(for="non-smoking") Non Smoking
+				div
+					div(class="label span-4") Amenities:
+					div(id="amenities",class="span-7 last")
+						input(id="amenities1",name="amenities",type="checkbox",value="OCEAN_VIEW")
+						label(for="amenities1") Ocean View
+						input(type="hidden",name="_amenities",value="on")
+						br
+						input(id="amenities2",name="amenities",type="checkbox",value="LATE_CHECKOUT")
+						label(for="amenities2") Late Checkout
+						input(type="hidden",name="_amenities",value="on")
+						br
+						input(id="amenities3",name="amenities",type="checkbox",value="MINIBAR")
+						label(for="amenities3") Minibar
+						input(type="hidden",name="_amenities",value="on")
+						br
+				div
+					div(class="span-4")
+						label(for="creditCard") Credit Card #:
+					div(class="span-7 last")
+						input(id="creditCard",name="creditCard",type="text",value="")
+				div
+					div(class="span-4")
+						label(for="creditCardName") Credit Card Name:
+					div(class="span-7 last")
+						input(id="creditCardName",name="creditCardName",type="text",value="",maxlength="40")
+				div
+					div(class="span-4")
+						label(for="creditCardExpiryMonth") Expiration Date:
+					div(class="span-7 last")
+						select(id="creditCardExpiryMonth",name="creditCardExpiryMonth")
+							option(value="1") Jan
+							option(value="2") Feb
+							option(value="3") Mar
+							option(value="4") Apr
+							option(value="5") May
+							option(value="6") Jun
+							option(value="7") Jul
+							option(value="8") Aug
+							option(value="9") Sep
+							option(value="10") Oct
+							option(value="11") Nov
+							option(value="12") Dec
+						select(id="creditCardExpiryYear",name="creditCardExpiryYear")
+							option(value="1") 2012
+							option(value="2") 2013
+							option(value="3") 2014
+							option(value="4") 2015
+							option(value="5") 2016
+				div
+					button(type="submit",id="proceed",name="_eventId_proceed") Proceed
+					button(type="submit",name="_eventId_cancel") Cancel

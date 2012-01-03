@@ -5,6 +5,7 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , moment = require('moment')
   , Sequelize = require("sequelize")
 
 var app = module.exports = express.createServer();
@@ -50,6 +51,20 @@ var Hotel = sequelize.define('Hotel', {
 	zip: Sequelize.STRING,
 	country: Sequelize.STRING
 }, {timestamps: false,freezeTableName: true});
+var Booking = sequelize.define('Booking', {
+	username : Sequelize.STRING,
+	hotel: Sequelize.INTEGER,
+	checkinDate: Sequelize.DATE,
+	checkoutDate: Sequelize.DATE,
+	creditCard : Sequelize.STRING,
+	creditCardName : Sequelize.STRING,
+	creditCardExpiryMonth: Sequelize.INTEGER,
+	creditCardExpiryYear: Sequelize.INTEGER,
+	smoking : Sequelize.STRING,
+	beds: Sequelize.INTEGER,
+	amenities : Sequelize.STRING,
+	state : Sequelize.STRING
+}, {timestamps: false,freezeTableName: true});
 sequelize.sync();
 
 // Authentication
@@ -82,7 +97,14 @@ app.get('/logout', function(req, res){
 	req.session.destroy();
 	res.redirect("/");
 });
-app.get('/search', routes.search);
+app.get('/search', function(req, res){
+	console.log("search invoked");
+	Booking.findAll({where:{state: 'BOOKED'}}).on('success', function(bookings) {
+		res.render('search', {title: 'Search', bookings: bookings})
+	});
+});
+
+
 app.get('/hotels/:id', function(req, res){
 	console.log("hotel detail invoked");
 	var query = Hotel.find(parseInt(req.params.id));
@@ -99,9 +121,71 @@ app.get('/hotels', function(req, res){
 });
 app.get('/booking', loggedIn, function(req, res){
 	console.log("booking invoked");
-	var query = Hotel.findAll({where:["name like ?", "%"+req.param("searchString")+"%"]});
+	var query = Hotel.find(parseInt(req.param["hotelId"]));
 	query.on('success', function(result) {
-		res.render('hotels', {title: 'Hotels', hotels: result});
+		res.render('booking', {title: 'Reservation', hotel: result});
+	});
+});
+app.post('/confirm', loggedIn, function(req, res){
+	console.log("confirm invoked: ");
+	var query = Hotel.find(parseInt(req.body["hotelId"]));
+	query.on('success', function(result) {
+		var booking = Booking.build({
+			username : req.session.user,
+			hotel: result.id,
+			checkinDate: moment(req.body.checkinDate, "MM-DD-YYYY"),
+			checkoutDate: moment(req.body.checkoutDate, "MM-DD-YYYY"),
+			creditCard : req.body.creditCard,
+			creditCardName : req.body.creditCardName,
+			creditCardExpiryMonth: parseInt(req.body.creditCardExpiryMonth),
+			creditCardExpiryYear: parseInt(req.body.creditCardExpiryYear),
+			smoking : req.body.smoking,
+			beds: 1,
+			amenities : req.body.amenities,
+			state : 'CREATED'
+		});
+		booking.save().on('success', function() {
+			booking.numberOfNights = (booking.checkoutDate - booking.checkinDate) / (24*60*60*1000);
+			booking.totalPayment = booking.numberOfNights * result.price;
+			res.render('confirm', {title: 'Confirmation', hotel: result, booking: booking});
+		}).on('failure', function(error) {
+			console.log(error);
+			res.send(error, 500);
+		})
+	});
+});
+app.post('/book', loggedIn, function(req, res){
+	console.log("book invoked");
+	console.log(req);
+	console.log(req.body["_eventId_cancel"]);
+	console.log(req.body._eventId_cancel);
+	console.log(req.param["_eventId_cancel"]);
+
+	var query = Booking.find(parseInt(req.body["bookingId"]));
+	query.on('success', function(booking) {
+		if (req.body["_eventId_confirm"]!=null) {
+			booking.state = "BOOKED";
+			booking.save().on('success', function() {
+				res.redirect("/search");
+			}).on('failure', function(error) {
+				console.log(error);
+				res.send(error, 500);
+			})
+		} else if (req.body["_eventId_cancel"]!=null) {
+			booking.state = "CANCELLED";
+			booking.save().on('success', function() {
+				res.redirect("/search");
+			}).on('failure', function(error) {
+				console.log(error);
+				res.send(error, 500);
+			})
+		} else if (req.body["_eventId_revise"]!=null) {
+			Hotel.find(booking.hotel).on('success', function(hotel) {
+				booking.numberOfNights = (booking.checkoutDate - booking.checkinDate) / (24*60*60*1000);
+				booking.totalPayment = booking.numberOfNights * hotel.price;
+				res.render('confirm', {title: 'Revise', hotel: hotel, booking: booking});
+			})
+		}
 	});
 });
 

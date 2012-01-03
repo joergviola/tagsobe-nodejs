@@ -1,0 +1,35 @@
+div(id="bookingForm")
+	div(class="span-5")
+		h3= hotel.name
+		
+		address
+			#{hotel.address}
+			br
+			#{hotel.city}, #{hotel.state} #{hotel.zip}
+			br
+			#{hotel.country}
+		p Nightly rate: #{hotel.price}
+	div(class="span-12")
+		form(id="confirm",action="../book",method="post")
+			input(type="hidden",name="bookingId",value="#{booking.id}")
+			fieldset
+				legend Confirm Booking Details
+				div
+					div(class="span-3") Check In:
+					div(class="span-8 last") #{booking.checkinDate}
+				div
+					div(class="span-3") Check Out:
+					div(class="span-8 last") #{booking.checkoutDate}
+				div
+					div(class="span-3") Number of Nights:
+					div(class="span-8 last") #{booking.numberOfNights}
+				div
+					div(class="span-3") Total Payment:
+					div(class="span-8 last") #{booking.totalPayment}
+				div
+					div(class="span-3") Credit Card #:
+					div(class="span-8 last") #{booking.creditCard}
+				div
+					button(type="submit",name="_eventId_confirm") Confirm
+					button(type="submit",name="_eventId_revise") Revise
+					button(type="submit",name="_eventId_cancel") Cancel

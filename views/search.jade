@@ -16,3 +16,14 @@ form(id="searchCriteria", action="hotels", method="get")
 			button(type="submit") Find Hotels
 
 div(id="bookings")
+	table(class="summary")
+		thead
+			tr
+				th No
+				th Hotel
+		tbody
+			each booking in bookings
+				tr
+					td= booking.id
+					td= booking.hotel
+						
