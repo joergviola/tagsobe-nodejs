@@ -96,7 +96,7 @@ app.get('/logout', function(req, res){
 	req.session.destroy();
 	res.redirect("/");
 });
-app.get('/search', function(req, res){
+app.get('/search', loggedIn, function(req, res){
 	Booking.findAll({where:{state: 'BOOKED'}}).on('success', function(bookings) {
 		res.render('search', {title: 'Search', bookings: bookings})
 	});
